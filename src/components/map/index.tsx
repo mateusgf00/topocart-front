@@ -3,6 +3,7 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
+import "./style.css"
 
 const WorldMap = () => {
   const [count, setCount] = useState(0);
@@ -23,7 +24,7 @@ const WorldMap = () => {
     });
 
     map.on("click", function() {
-      setCount(count+ 1);
+      setCount((count)=> count + 1);
     });
 
     return () => {
@@ -31,10 +32,15 @@ const WorldMap = () => {
     };
   }, []);
 
+  function resettingCounter() {
+    setCount(0);
+  }
+
   return (
     <>
-      <div ref={mapContainer} style={{ width: "100%", height: "400px" }} />
-      <p>Quantidade de clicks: {count}</p>
+      <div ref={mapContainer} className="map" />
+      <p className="counter">Quantidade de clicks: {count}</p>
+      <button onClick={resettingCounter} className="button-resseting-counter">Zerar contador</button>
     </>
   );
 };
